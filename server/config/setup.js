@@ -4,7 +4,7 @@ import * as AdminJSMongoose from "@adminjs/mongoose";
 import * as Models from "../model/index.js";
 import { COOKIE_PASSWORD, authenticate, sessionStore } from "./config.js";
 AdminJS.registerAdapter(AdminJSMongoose);
-import {dark, light ,noSidebar} from "@adminjs/themes";
+import { dark, light, noSidebar } from "@adminjs/themes";
 
 export const admin = new AdminJS({
   resources: [
@@ -31,7 +31,11 @@ export const admin = new AdminJS({
     },
     {
       resource: Models.Branch,
+    },
+    {
       resource: Models.Category,
+    },
+    {
       resource: Models.Product,
     },
   ],
@@ -44,7 +48,7 @@ export const admin = new AdminJS({
     logo: "https://res.cloudinary.com/dponzgerb/image/upload/v1722852076/s32qztc3slzqukdletgj.png",
   },
   defaultTheme: dark.id,
-  availableThemes: [dark, light,noSidebar],
+  availableThemes: [dark, light, noSidebar],
   rootPath: "/admin",
 });
 
