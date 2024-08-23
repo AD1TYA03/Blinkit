@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Counter from "./counter";
+import Counter from "./counter.js";
 
 const orderSchema = mongoose.Schema({
     orderId:{
@@ -40,12 +40,12 @@ const orderSchema = mongoose.Schema({
         },
     ],
     deliveryLocation:{
-        latitude: { type: Number ,required:true },
-        longitude: { type: Number , require:true},
+        latitude: { type: Number ,required: true },
+        longitude: { type: Number , required: true},
     },
     pickupLocation:{
-        latitude: { type: Number , required:true },
-        longitude: { type: Number , require:true},
+        latitude: { type: Number , required: true },
+        longitude: { type: Number , required: true},
         address: { type: String},
     },
     deliveryPersonLocation:{
@@ -58,7 +58,7 @@ const orderSchema = mongoose.Schema({
         enum: ["available","confirmed","arriving","delivered","cancelled"],
         default: "available",
     },
-    totalPrice:{type:Number,required:true},
+    totalPrice:{type:Number,required: true},
     createdAt:{type: Date, default: Date.now},
     updatedAt:{type:Date , default: Date.now},
 });
@@ -80,6 +80,6 @@ orderSchema.pre('save', async function(next){
     next();
 });
 
-const Order = mongoose.Model('Order',orderSchema);
+const Order = mongoose.model('Order',orderSchema);
 
 export default Order;

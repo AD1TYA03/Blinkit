@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const counterSchema = new mongoose.Schema({
     name: {
-        typeof: String,
+        type: String,
         required: true,
         unique: true,
     },
