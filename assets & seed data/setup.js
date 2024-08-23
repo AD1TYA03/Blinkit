@@ -1,10 +1,11 @@
 import AdminJS from "adminjs";
 import AdminJSFastify from "@adminjs/fastify";
 import * as AdminJSMongoose from "@adminjs/mongoose";
-import * as Models from "../model/index.js";
-import { COOKIE_PASSWORD, authenticate, sessionStore } from "./config.js";
+import * as Models from "../models/index.js";
+import { authenticate, COOKIE_PASSWORD, sessionStore } from "./config.js";
+import { dark, light, noSidebar } from "@adminjs/themes";
+
 AdminJS.registerAdapter(AdminJSMongoose);
-import {dark, light ,noSidebar} from "@adminjs/themes";
 
 export const admin = new AdminJS({
   resources: [
@@ -29,9 +30,11 @@ export const admin = new AdminJS({
         filterProperties: ["email", "role"],
       },
     },
-    {
-      resource: Models.Branch,
-    },
+    { resource: Models.Branch },
+    { resource: Models.Product },
+    { resource: Models.Category },
+    { resource: Models.Order },
+    { resource: Models.Counter },
   ],
 
   branding: {
@@ -42,7 +45,7 @@ export const admin = new AdminJS({
     logo: "https://res.cloudinary.com/dponzgerb/image/upload/v1722852076/s32qztc3slzqukdletgj.png",
   },
   defaultTheme: dark.id,
-  availableThemes: [dark, light,noSidebar],
+  availableThemes: [dark, light, noSidebar],
   rootPath: "/admin",
 });
 
@@ -52,11 +55,12 @@ export const buildAdminRouter = async (app) => {
     {
       authenticate,
       cookiePassword: COOKIE_PASSWORD,
+      cookieName: "adminjs",
     },
     app,
     {
       store: sessionStore,
-      saveUninitialized: true,
+      saveUnintialized: true,
       secret: COOKIE_PASSWORD,
       cookie: {
         httpOnly: process.env.NODE_ENV === "production",

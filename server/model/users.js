@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 //BASE USER SCHEMA
 const userSchema = new mongoose.Schema({
   name: { type: String },
@@ -27,7 +29,7 @@ const customerSchema = new mongoose.Schema({
     latitude: { type: Number },
     longitude: { type: Number },
   },
-  address: { typeof: String },
+  address: { type: String },
 });
 
 
@@ -54,7 +56,7 @@ const DeliveryPartnerSchema = new mongoose.Schema({
       latitude: { type: Number },
       longitude: { type: Number },
     },
-    address: { typeof: String },
+    address: { type: String },
     branch:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Branch",
