@@ -31,6 +31,8 @@ export const admin = new AdminJS({
     },
     {
       resource: Models.Branch,
+      resource: Models.Category,
+      resource: Models.Product,
     },
   ],
 
