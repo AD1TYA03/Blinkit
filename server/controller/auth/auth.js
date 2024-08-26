@@ -13,7 +13,7 @@ const generateToken = (user) => {
   const refreshToken = jwt.sign(
     { userId: user._id, role: user.role },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "1d" }
+    { expiresIn: "7d" }
   );
   return { accessToken, refreshToken };
 };
@@ -153,4 +153,3 @@ export const loginDeliveryPartner = async (req, reply) => {
   }
 
 
-  
